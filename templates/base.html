@@ -1,0 +1,20 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<link rel="stylesheet" type="text/css"
+      href="http://yegor256.github.io/tacit/tacit.min.css"/>
+  <meta charset="utf-8">
+  <title>{% block title %}Magic Portal{% endblock %}</title>
+  {% load static %}
+</head>
+<body>
+<H1>Magic Portal</H1>
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+</body>
+</html>

@@ -1,0 +1,36 @@
+# users/views.py
+from django.urls import reverse_lazy
+from django.views import generic
+from django.shortcuts import redirect
+
+from .forms import CustomUserCreationForm
+
+from random import shuffle
+
+import copy
+
+from .models import CustomUser
+
+class SignUp(generic.CreateView):
+    form_class = CustomUserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'signup.html'
+
+def super_shuffle(lst):
+    new_lst = copy.copy(lst)
+    shuffle(new_lst)
+    for old, new in zip(lst, new_lst):
+        if old == new:
+            return super_shuffle(lst)
+
+    return new_lst
+
+def pickSecretSanta(request):
+    setSantaList = CustomUser.objects.all()
+    randomList = list(CustomUser.objects.all())
+    randomList = super_shuffle(randomList)
+    for santa, randomSanta in zip(setSantaList, randomList):
+        santa.secret_santa_of = randomSanta.first_name + ' ' + randomSanta.last_name
+        santa.save()
+    response = redirect('home')
+    return response
