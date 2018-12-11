@@ -5,17 +5,15 @@
 	{% load static %}
 	<link rel="stylesheet" type="text/css" href="{% static '/secretSanta/stylesheets/christmasLights.min.css' %}"/>
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-	<link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
 	<!-- <link rel="stylesheet" type="text/css" href="http://yegor256.github.io/tacit/tacit.min.css"/> -->
 	<meta charset="utf-8">
 	<title>{% block title %}Magic Portal{% endblock %}</title>
 	<style>
 		.bloodyCrappyElement {margin-top: -8.5%}
 		@media only screen and (min-width: 600px){.bloodyCrappyElement {margin-top: -4.5%;}}
-		.w3-myfont {font-family: 'Niconne', cursive;}
 	</style>
 </head>
-<body class="w3-display-container w3-myfont" style="background-color:#9FD5B3;background-image:url({% static '/secretSanta/images/background.svg' %})">
+<body class="w3-display-container" style="background-color:#9FD5B3;background-image:url({% static '/secretSanta/images/background.jpg' %})">
 	
 	<div class="christmasLightsClass">
 		<ul class="lightrope">
@@ -64,11 +62,11 @@
 		</ul>
 	</div>
 	
-	<div class="w3-container" style="text-align: center">
+	<div class="w3-container">
 		<div class="w3-row w3-container <!--w3-mobile-->" style="z-index: 10; position:relative">
 			<div class="w3-quarter w3-container"></div>
 			<div class="w3-half" style="margin-top:10%;">
-				<img src="{% static '/secretSanta/images/santa.svg' %}" alt="headerSanta" style="height: auto;width:100%;">
+				<img src="{% static '/secretSanta/images/santa.png' %}" alt="headerSanta" style="height: auto;width:100%;">
 			</div>
 			<div class="w3-quarter w3-container"></div>
 		</div>
@@ -76,17 +74,15 @@
 			<div class="w3-quarter w3-container"></div>
 			<div id="bloodyCrappyElement" class="w3-card-4 w3-half bloodyCrappyElement" style="<!--margin-top: -8.5%-->;background-color:#F7EBE2;">
 
-				<header class = "w3-container">
-					<h1 class = "w3-myfont">Magic Portal</h1>
+				<header class="w3-container">
+					<h1>Magic Portal</h1>
 				</header>
 
 				<div class="w3-container">
-					<p>
-						<main>
-							{% block content %}
-							{% endblock %}
-						</main>
-					</p>
+					<p>  <main>
+    {% block content %}
+    {% endblock %}
+  </main></p>
 				</div>
 
 			</div>

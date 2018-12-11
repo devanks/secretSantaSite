@@ -1,1 +1,1 @@
-web: gunicorn secretSantaSite.wsgi
+web: gunicorn mysite.wsgi --log-file -

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 import django_heroku
+import dotenv
 import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -27,17 +28,22 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = '%0z5a-rb7yq+)ew6je-z$)$@lrov7oxff6p-fi2m=^18$v4s35'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1:8000', '.herokuapp.com']
 
 # Application definition
+
+FIELD_ENCRYPTION_KEY = os.environ.get("FIELD_ENCRYPTION_KEY", "2U_VTHakjybhIyk2fdbp2IXtmOyBryJT1EC2EDqJMvc=")
+
+# FIELD_ENCRYPTION_KEY = 
 
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'encrypted_model_fields',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'secretSanta.apps.SecretsantaConfig',
@@ -77,16 +83,8 @@ WSGI_APPLICATION = 'secretSantaSite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'djangogirls',
-        'USER': 'name',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
-}
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 
 # Password validation
@@ -140,7 +138,10 @@ AUTH_USER_MODEL = 'secretSanta.CustomUser'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
+dotenv_file = os.path.join(BASE_DIR, ".env")
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
 
-DEBUG = os.environ.get('DEBUG', default=False)
-db_from_env = dj_database_url.config(conn_max_age=500)
+
+# db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)

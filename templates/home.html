@@ -5,15 +5,17 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-  Hi {{ user.username }}!
+  <H2 class="w3-myfont"><p>Hi {{ user.first_name }} {{ user.last_name }}!</p></H2>
   
   {% if user.secret_santa_of %}
-   You are the Secret Santa of {{ user.secret_santa_of }}
+   <H3 class="w3-myfont"><p>You are the Secret Santa of {{ user.secret_santa_of }}</p></H3>
+   {% else %}
+   <H3 class="w3-myfont"><p>Secret Santa hasn't been assigned yet. <p><b>Ping the admin!</b></p></p></H3>
    {% endif %}
-  <p><a href="{% url 'logout' %}">logout</a></p>
+  <p><a href="{% url 'logout' %}" class="w3-button w3-round-xxlarge w3-red w3-myfont">logout</a></p>
 {% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">login</a> |
-  <a href="{% url 'signup' %}">signup</a>
+  <H3 class="w3-myfont"><p>You are not logged in</p></H3>
+  <a href="{% url 'login' %}" class="w3-button w3-round-xxlarge w3-red w3-myfont">login</a> |
+  <a href="{% url 'signup' %}" class="w3-button w3-round-xxlarge w3-red w3-myfont">signup</a>
 {% endif %}
 {% endblock %}
