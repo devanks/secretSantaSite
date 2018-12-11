@@ -28,7 +28,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = '%0z5a-rb7yq+)ew6je-z$)$@lrov7oxff6p-fi2m=^18$v4s35'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(os.environ.get('DEBUG', ''))
 
 ALLOWED_HOSTS = ['127.0.0.1:8000', '.herokuapp.com']
 
