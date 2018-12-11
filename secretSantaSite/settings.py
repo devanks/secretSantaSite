@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get('djangoKey', '%0z5a-rb7yq+)ew6je-z$)$@lrov7oxff6p-fi
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DEBUG', ''))
 
-ALLOWED_HOSTS = ['127.0.0.1:8000', '.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1:8000', '.herokuapp.com','magic-portal-secret-santa.herokuapp.com']
 
 # Application definition
 
@@ -145,5 +145,5 @@ if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
 
 
-# db_from_env = dj_database_url.config(conn_max_age=500)
-# DATABASES['default'].update(db_from_env)
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
