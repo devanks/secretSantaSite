@@ -65,7 +65,7 @@
 	</div>
 	
 	{% if messages %}
-		<div class="w3-modal">
+		<div class="w3-modal" style="display:block;">
 		{% for message in messages %}
 		<div class="w3-modal-content">
 			{% if message.tags == "error" %}
