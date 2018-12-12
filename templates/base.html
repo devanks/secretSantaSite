@@ -65,18 +65,20 @@
 	</div>
 	
 	{% if messages %}
-		<div id="messagesModal" class="w3-modal" style="display:block;">
+		<div id="messagesModal" class="w3-modal" style="display:block;z-index:11">
 		{% for message in messages %}
 		<div class="w3-modal-content">
 			{% if message.tags == "error" %}
 			<div class="w3-panel w3-card-4 w3-red alert-{{ message.tags }}">
-				<span onclick="document.getElementById('messagesModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-				<H1 style="font-family: 'Niconne', cursive;">{{ message|safe }}</H1>
+				<H1 style="font-family: 'Niconne', cursive;">
+					<span onclick="document.getElementById('messagesModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>{{ message|safe }}
+				</H1>
 			</div>
 			{% else %}
 			<div class="w3-panel w3-card-4 w3-blue alert-{{ message.tags }}">
-				<span onclick="document.getElementById('messagesModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-				<H1 style="font-family: 'Niconne', cursive;">{{ message|safe }}</H1>
+				<H1 style="font-family: 'Niconne', cursive;">
+					<span onclick="document.getElementById('messagesModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>{{ message|safe }}
+				</H1>
 			</div>
 			{% endif %}
 		</div>
@@ -87,7 +89,7 @@
 	<div class="w3-container" style="text-align: center">
 		<div class="w3-row w3-container <!--w3-mobile-->" style="z-index: 10; position:relative">
 			<div class="w3-quarter w3-container"></div>
-			<div class="w3-half" style="margin-top:10%;">
+			<div class="w3-half" style="margin-top:5%;">
 				<img src="{% static '/secretSanta/images/santa.svg' %}" alt="headerSanta" style="height: auto;width:100%;">
 			</div>
 			<div class="w3-quarter w3-container"></div>
