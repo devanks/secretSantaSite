@@ -32,15 +32,16 @@ def pickSecretSanta(request):
     if request.user.is_superuser:
         setSantaList = CustomUser.objects.all()
         randomList = list(CustomUser.objects.all())
-        randomList = super_shuffle(randomList)
-        for santa, randomSanta in zip(setSantaList, randomList):
-            santa.secret_santa_of = randomSanta.first_name + ' ' + randomSanta.last_name
-            santa.save()
-        messages.error(request, 'The Santas have been assigned')
-        response = redirect('home')
-        return response
+        countOfSanta = CustomUser.objects.all().count()
+        if countOfSanta > 2:
+            randomList = super_shuffle(randomList)
+            for santa, randomSanta in zip(setSantaList, randomList):
+                santa.secret_santa_of = randomSanta.first_name + ' ' + randomSanta.last_name
+                santa.save()
+            messages.error(request, 'The Santas have been assigned.')
+        else:
+            messages.error(request, 'The number of Santas need to be more than 2.')
     else:
-        messages.error(request, 'Please ping the admin to do the Santa assignment. Ho Ho Ho!')
-        response = redirect('home')
-        return response
-        
+        messages.error(request, 'Please ping the admin to do the "Secret Santa" assignment. Ho Ho Ho!')
+    response = redirect('home')
+    return response
