@@ -40,5 +40,6 @@ def pickSecretSanta(request):
         response = redirect('home')
         return response
     else:
-        messages.error(request, 'The Santas have been assigned')
+        messages.error(request, 'Please ping the admin to do the Santa assignment. Ho Ho Ho!')
+        return response
         
