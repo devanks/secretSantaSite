@@ -38,7 +38,7 @@ def pickSecretSanta(request):
             for santa, randomSanta in zip(setSantaList, randomList):
                 santa.secret_santa_of = randomSanta.first_name + ' ' + randomSanta.last_name
                 santa.save()
-            messages.error(request, 'The Santas have been assigned.')
+            messages.success(request, 'The Santas have been assigned.')
         else:
             messages.error(request, 'The number of Santas need to be more than 2.')
     else:

@@ -65,11 +65,18 @@
 	</div>
 	
 	{% if messages %}
-		<div class="w3-container">
+		<div class="w3-modal">
 		{% for message in messages %}
-			<div class="alert alert-{{ message.tags }}">
+		<div class="w3-modal-content">
+			{% if message.tags == "error" %}
+			<div class="w3-panel w3-red alert-{{ message.tags }}">
 				{{ message|safe }}
 			</div>
+			{% else %}
+			<div class="w3-panel w3-blue alert-{{ message.tags }}">
+				{{ message|safe }}
+			</div>
+		</div>
 		{% endfor %}
 		</div>
 	{% endif %}
