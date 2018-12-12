@@ -3,6 +3,9 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.shortcuts import redirect
 
+from django.contrib import messages
+
+
 from .forms import CustomUserCreationForm
 
 from random import shuffle
@@ -26,11 +29,16 @@ def super_shuffle(lst):
     return new_lst
 
 def pickSecretSanta(request):
-    setSantaList = CustomUser.objects.all()
-    randomList = list(CustomUser.objects.all())
-    randomList = super_shuffle(randomList)
-    for santa, randomSanta in zip(setSantaList, randomList):
-        santa.secret_santa_of = randomSanta.first_name + ' ' + randomSanta.last_name
-        santa.save()
-    response = redirect('home')
-    return response
+    if request.user.is_superuser:
+        setSantaList = CustomUser.objects.all()
+        randomList = list(CustomUser.objects.all())
+        randomList = super_shuffle(randomList)
+        for santa, randomSanta in zip(setSantaList, randomList):
+            santa.secret_santa_of = randomSanta.first_name + ' ' + randomSanta.last_name
+            santa.save()
+        messages.error(request, 'The Santas have been assigned')
+        response = redirect('home')
+        return response
+    else:
+        messages.error(request, 'The Santas have been assigned')
+        
