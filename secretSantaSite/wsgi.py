@@ -10,10 +10,13 @@ https://docs.djangoproject.com/en/2.1/howto/deployment/wsgi/
 import os
 
 from django.core.wsgi import get_wsgi_application
-from whitenoise.django import DjangoWhiteNoise
 
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'secretSantaSite.settings')
 
 application = get_wsgi_application()
-application = DjangoWhiteNoise(application)
+
+# Whitenoise for the collectStatic on heroku
+
+# from whitenoise.django import DjangoWhiteNoise
+# application = DjangoWhiteNoise(application)
